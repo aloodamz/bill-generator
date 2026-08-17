@@ -61,13 +61,11 @@ export default function Receipt({ transaction, isPrinting = false }) {
           </p>
         </div>
 
-        <div className="mt-4 flex justify-between text-[11px]">
-          <span className="text-neutral-500">
-            Txn {formatTransactionNo(id)}
-          </span>
-          <span className="text-neutral-500">
+        <div className="mt-4 space-y-0.5 text-center text-[11px] text-neutral-500">
+          <p className="whitespace-nowrap">Txn {formatTransactionNo(id)}</p>
+          <p className="whitespace-nowrap">
             {dateTime.day} &bull; {dateTime.time}
-          </span>
+          </p>
         </div>
 
         <div className="mt-3 border-t border-dashed border-neutral-400" />
@@ -78,7 +76,7 @@ export default function Receipt({ transaction, isPrinting = false }) {
               key={item.id}
               className="grid grid-cols-[1fr_18px_minmax(52px,auto)] items-baseline gap-2"
             >
-              <span className="truncate text-neutral-900">{item.name}</span>
+              <span className="min-w-0 truncate text-neutral-900">{item.name}</span>
               <span className="text-center tabular-nums text-neutral-500">
                 {item.qty}
               </span>

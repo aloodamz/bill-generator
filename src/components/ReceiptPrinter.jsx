@@ -30,9 +30,13 @@ export default function ReceiptPrinter({ phase, transaction }) {
         <div className="absolute inset-x-3 top-[3px] h-px bg-white/10" />
       </div>
 
-      {/* emerging receipt */}
+      {/* emerging receipt — no justify-items-center: that would make this
+          grid item shrink-to-fit, and Receipt's percentage width can't
+          resolve against an indefinite parent width (it collapses to a
+          much narrower intrinsic size instead). Let it stretch full width
+          and centering happens via Receipt's own mx-auto. */}
       <div
-        className="relative z-10 grid justify-items-center"
+        className="relative z-10 grid"
         style={{
           gridTemplateRows: expanded ? '1fr' : '0fr',
           transition: phase === 'retracting' ? RETRACT_TRANSITION : EMERGE_TRANSITION,
