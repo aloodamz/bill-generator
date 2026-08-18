@@ -10,7 +10,7 @@ import PaymentButton from './PaymentButton'
 import PaymentStatusOverlay from './PaymentStatusOverlay'
 import BillPreview from './BillPreview'
 import OrderComplete from './OrderComplete'
-import ReceiptPrinter from './ReceiptPrinter'
+import ReceiptPrinter, { PRINT_DURATION_MS } from './ReceiptPrinter'
 
 const TAX_RATE = 0.05
 const START_TXN_ID = 482
@@ -110,8 +110,8 @@ export default function POSMachine() {
     setStage('dispatching')
     schedule(() => {
       setStage('printing')
-      playPrinterBuzz(1.5)
-      schedule(() => setStage('printed'), 1500)
+      playPrinterBuzz(PRINT_DURATION_MS / 1000)
+      schedule(() => setStage('printed'), PRINT_DURATION_MS)
     }, 500)
   }
 
@@ -122,8 +122,8 @@ export default function POSMachine() {
     setStage('retracting')
     schedule(() => {
       setStage('printing')
-      playPrinterBuzz(1.4)
-      schedule(() => setStage('printed'), 1500)
+      playPrinterBuzz(PRINT_DURATION_MS / 1000)
+      schedule(() => setStage('printed'), PRINT_DURATION_MS)
     }, 450)
   }
 

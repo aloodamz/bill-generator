@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import Receipt from './Receipt'
 
-const EMERGE_TRANSITION =
-  'grid-template-rows 1.5s cubic-bezier(0.16, 1, 0.3, 1)'
+// Kept in sync with the `printing` timeout in POSMachine.jsx — the paper
+// should finish sliding out right as the stage flips to 'printed'.
+export const PRINT_DURATION_MS = 2800
+
+const EMERGE_TRANSITION = `grid-template-rows ${PRINT_DURATION_MS}ms cubic-bezier(0.22, 0.61, 0.36, 1)`
 const RETRACT_TRANSITION = 'grid-template-rows 0.45s cubic-bezier(0.4, 0, 1, 1)'
 
 export default function ReceiptPrinter({ phase, transaction }) {
@@ -49,16 +52,11 @@ export default function ReceiptPrinter({ phase, transaction }) {
               className={isPrinting ? 'animate-paper-wobble' : ''}
               style={{ transformOrigin: 'top center' }}
             >
-              <Receipt transaction={transaction} isPrinting={isPrinting} />
+              <Receipt transaction={transaction} />
             </div>
           )}
         </div>
       </div>
-
-      {/* contact shadow on the "counter" */}
-      {phase === 'printed' && (
-        <div className="animate-fade-up mx-auto -mt-1 h-4 w-40 rounded-full bg-black/15 blur-md" />
-      )}
     </div>
   )
 }

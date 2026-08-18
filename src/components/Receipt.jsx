@@ -26,29 +26,17 @@ function useTornEdgePath(seed) {
   }, [seed])
 }
 
-export default function Receipt({ transaction, isPrinting = false }) {
+export default function Receipt({ transaction }) {
   const { id, dateTime, items, subtotal, tax, total, paymentMethod } =
     transaction
   const clipPath = useTornEdgePath(id)
 
   return (
     <div
-      className="relative mx-auto w-[80%] max-w-[272px] bg-[#fbfaf5] font-mono text-neutral-800 drop-shadow-[0_14px_18px_rgba(0,0,0,0.3)]"
+      className="relative mx-auto w-[80%] max-w-[272px] bg-[#fbfaf5] font-mono text-neutral-800"
       style={{ clipPath, transform: 'rotate(-0.35deg)' }}
     >
       <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-multiply" />
-
-      {isPrinting && (
-        <div
-          className="animate-print-sweep pointer-events-none absolute inset-0 mix-blend-soft-light"
-          style={{
-            backgroundImage:
-              'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.9) 8%, transparent 18%)',
-            backgroundSize: '100% 500%',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-      )}
 
       <div className="relative px-4 pt-5 pb-8 text-[11.5px] leading-[1.6]">
         <div className="text-center">
